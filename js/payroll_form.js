@@ -59,7 +59,6 @@ class EmployeePayrollData {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    // Event listener for salary
     const salary = document.querySelector('#salary');
     const output = document.querySelector('.salary-output');
     output.textContent = salary.value;
@@ -67,7 +66,6 @@ window.addEventListener('DOMContentLoaded', () => {
         output.textContent = salary.value;
     });
 
-    //Event listener for name
     const name = document.querySelector('#name');
     const textError = document.querySelector('.text-error');
     name.addEventListener('input', function () {
@@ -83,7 +81,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    //Event listener for date
     const date = document.querySelector('#date');
     const dateError = document.querySelector('.date-error');
     date.addEventListener('input', function () {
@@ -119,7 +116,18 @@ function createAndUpdateStorage(employeePayrollData) {
     localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
 }
 
-//Populating the employee payroll object
+const resetForm = () => {
+    setValue('#name', '');
+    unsetSelectedValues('[name = gender');
+    unsetSelectedValues('[name = department');
+    unsetSelectedValues('[name = profile');
+    setValue('#salary'. ' ');
+    setValue('#day', '1');
+    setValue('#month', 'January');
+    setValue('#year', '2020');
+    setValue('#notes', '');
+}
+
 const createEmployeePayrollData = () => {
     let employeePayrollData = new EmployeePayrollData();
     try {
@@ -153,4 +161,33 @@ const getSelectedValues = (propertyValue) => {
 const getInputValueById = (id) => {
     let value = document.querySelector(id).value;
     return value;
+}
+// Resetting the form on clicking reset button
+const resetForm = () => {
+    setValue('#name', '');
+    unsetSelectedValues('[name = gender');
+    unsetSelectedValues('[name = department');
+    unsetSelectedValues('[name = profile');
+    setValue('#salary'. ' ');
+    setValue('#day', '1');
+    setValue('#month', 'January');
+    setValue('#year', '2020');
+    setValue('#notes', '');
+}
+
+const unsetSelectedValues = (propertyValue) => {
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item => {
+        item.checked = false;
+    });
+}
+
+const setValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.value = value
+}
+
+const setTextValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.textContent = value;
 }
